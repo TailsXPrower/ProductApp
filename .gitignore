@@ -1,2 +1,5 @@
 ﻿.idea/
 
+# .NET Core build folders
+bin/
+obj/
