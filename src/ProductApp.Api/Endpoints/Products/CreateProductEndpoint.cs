@@ -34,7 +34,7 @@ public sealed class CreateProductEndpoint(
             return;
         }
 
-        var product = new Product(req.Name, req.Price, req.Description);
+        var product = req.ToEntity();
         await repository.AddAsync(product, cancellationToken);
 
         await Send.CreatedAtAsync<GetProductByIdEndpoint>(

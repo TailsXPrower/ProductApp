@@ -44,7 +44,7 @@ public sealed class UpdateProductEndpoint(
             return;
         }
 
-        product.UpdateDetails(req.Name, req.Price, req.Description);
+        product.UpdateFromRequest(req);
         await repository.UpdateAsync(product, cancellationToken);
 
         await Send.OkAsync(product.ToDto(), cancellationToken);
