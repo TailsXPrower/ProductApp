@@ -29,12 +29,13 @@ public sealed class ProductApiFactory : WebApplicationFactory<Program>, IAsyncLi
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        builder.UseEnvironment("Test");
+
         builder.ConfigureServices(services =>
         {
-            services.RemoveAll<DbContextOptions<AppDbContext>>();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(_database.ConnectionString));
-        
+
             using var provider = services.BuildServiceProvider();
             using var scope = provider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();

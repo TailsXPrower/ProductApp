@@ -7,11 +7,15 @@ using ProductApp.Infrastructure.Persistence;
 using ProductApp.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddNpgsqlDbContext<AppDbContext>(connectionName: "productapp");
 
-builder.AddServiceDefaults();
+// Database
+if (!builder.Environment.IsEnvironment("Test"))
+    builder.AddNpgsqlDbContext<AppDbContext>(connectionName: "productapp");
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+// Telemetry, Health Checks, etc.
+builder.AddServiceDefaults();
 
 // FastEndpoints and Swagger
 builder.Services.AddFastEndpoints();
