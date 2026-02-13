@@ -1,0 +1,8 @@
+{
+  "ProductApp.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\upcode\\ProductApp\\src\\ProductApp.Api",
+  "ProductApp.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\upcode\\ProductApp\\src\\ProductApp.Application",
+  "ProductApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\upcode\\ProductApp\\src\\ProductApp.Data",
+  "ProductApp.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\upcode\\ProductApp\\src\\ProductApp.Infrastructure",
+  "ProductApp.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\upcode\\ProductApp\\src\\ProductApp.Model",
+  "ProductApp.ServiceDefaults, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "E:\\upcode\\ProductApp\\src\\ProductApp.ServiceDefaults"
+}

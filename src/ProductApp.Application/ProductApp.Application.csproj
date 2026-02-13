@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <!-- Local Dependencies -->
+    <ItemGroup>
+        <ProjectReference Include="..\ProductApp.Data\ProductApp.Data.csproj" />
+        <ProjectReference Include="..\ProductApp.Model\ProductApp.Model.csproj" />
+    </ItemGroup>
+
+    <!-- External Dependencies -->
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="12.1.1" />
+    </ItemGroup>  
+</Project>

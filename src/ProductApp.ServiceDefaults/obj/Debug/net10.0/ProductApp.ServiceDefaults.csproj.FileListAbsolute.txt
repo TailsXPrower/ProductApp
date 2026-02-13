@@ -1,0 +1,12 @@
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\bin\Debug\net10.0\ProductApp.ServiceDefaults.deps.json
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\bin\Debug\net10.0\ProductApp.ServiceDefaults.dll
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\bin\Debug\net10.0\ProductApp.ServiceDefaults.pdb
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\ProductApp.ServiceDefaults.csproj.AssemblyReference.cache
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\ProductApp.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\ProductApp.ServiceDefaults.AssemblyInfoInputs.cache
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\ProductApp.ServiceDefaults.AssemblyInfo.cs
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\ProductApp.ServiceDefaults.csproj.CoreCompileInputs.cache
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\ProductApp.ServiceDefaults.dll
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\refint\ProductApp.ServiceDefaults.dll
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\ProductApp.ServiceDefaults.pdb
+E:\upcode\ProductApp\src\ProductApp.ServiceDefaults\obj\Debug\net10.0\ref\ProductApp.ServiceDefaults.dll

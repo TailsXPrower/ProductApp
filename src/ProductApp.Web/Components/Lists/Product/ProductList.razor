@@ -1,0 +1,39 @@
+﻿@using ProductApp.Model.DTO
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Products)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Price.ToString("C")</td>
+            <td>@product.Description</td>
+            <td class="text-end">
+                <button class="btn btn-sm btn-outline-primary me-2" @onclick="() => OnEdit.InvokeAsync(product)">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" @onclick="() => OnDelete.InvokeAsync(product.Id)">Delete</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public required List<ProductDto> Products { get; set; }
+    
+    [Parameter]
+    public EventCallback<ProductDto> OnEdit { get; set; }
+    
+    [Parameter]
+    public EventCallback<int> OnDelete { get; set; }
+}

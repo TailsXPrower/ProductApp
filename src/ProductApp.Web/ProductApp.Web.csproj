@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    </PropertyGroup>
+
+    <!-- Local Dependencies -->
+    <ItemGroup>
+        <ProjectReference Include="..\ProductApp.ServiceDefaults\ProductApp.ServiceDefaults.csproj" />
+        <ProjectReference Include="..\ProductApp.Model\ProductApp.Model.csproj" />
+    </ItemGroup>
+</Project>

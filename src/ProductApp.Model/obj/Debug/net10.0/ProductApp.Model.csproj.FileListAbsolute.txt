@@ -1,0 +1,11 @@
+E:\upcode\ProductApp\src\ProductApp.Model\bin\Debug\net10.0\ProductApp.Model.deps.json
+E:\upcode\ProductApp\src\ProductApp.Model\bin\Debug\net10.0\ProductApp.Model.dll
+E:\upcode\ProductApp\src\ProductApp.Model\bin\Debug\net10.0\ProductApp.Model.pdb
+E:\upcode\ProductApp\src\ProductApp.Model\obj\Debug\net10.0\ProductApp.Model.GeneratedMSBuildEditorConfig.editorconfig
+E:\upcode\ProductApp\src\ProductApp.Model\obj\Debug\net10.0\ProductApp.Model.AssemblyInfoInputs.cache
+E:\upcode\ProductApp\src\ProductApp.Model\obj\Debug\net10.0\ProductApp.Model.AssemblyInfo.cs
+E:\upcode\ProductApp\src\ProductApp.Model\obj\Debug\net10.0\ProductApp.Model.csproj.CoreCompileInputs.cache
+E:\upcode\ProductApp\src\ProductApp.Model\obj\Debug\net10.0\ProductApp.Model.dll
+E:\upcode\ProductApp\src\ProductApp.Model\obj\Debug\net10.0\refint\ProductApp.Model.dll
+E:\upcode\ProductApp\src\ProductApp.Model\obj\Debug\net10.0\ProductApp.Model.pdb
+E:\upcode\ProductApp\src\ProductApp.Model\obj\Debug\net10.0\ref\ProductApp.Model.dll

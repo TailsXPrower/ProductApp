@@ -1,0 +1,147 @@
+@page "/products"
+@using ProductApp.Model.DTO
+@using ProductApp.Model.Forms
+@using ProductApp.Model.Requests
+@using ProductApp.Web.Components.Forms.Product
+@using ProductApp.Web.Components.Lists.Product
+@using ProductApp.Web.Services
+
+@inject ProductApiClient ApiClient
+
+<PageTitle>Products</PageTitle>
+
+<h1>Products</h1>
+
+<button class="btn btn-primary mb-3" @onclick="@ShowCreateForm">Create Product</button>
+
+@if (_isCreatingOrEditing)
+{
+    <ProductEditForm EditModel="_editModel" 
+                     IsEditMode="_isEditMode" 
+                     OnValidSubmit="HandleSubmit" 
+                     CancelEdit="CancelEdit" />
+}
+
+@if (_isLoading)
+{
+    <p>Loading products...</p>
+}
+else if (_errorMessage is not null)
+{
+    <div class="alert alert-danger">@_errorMessage</div>
+}
+else if (_products.Count == 0)
+{
+    <p>No products available.</p>
+}
+else
+{
+    <ProductList Products="_products" OnEdit="StartEdit" OnDelete="ConfirmDelete" />
+}
+
+@code {
+    private readonly List<ProductDto> _products = [];
+    private bool _isLoading = true;
+    private string? _errorMessage;
+    private bool _isEditMode;
+    private EditProductModel _editModel = new();
+    private bool _isCreatingOrEditing;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var products = await ApiClient.GetProductsAsync();
+            _products.AddRange(products);
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Failed to load products: {ex.Message}";
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private void ShowCreateForm()
+    {
+        _editModel = new EditProductModel();
+        _isEditMode = false;
+        _isCreatingOrEditing = true;
+    }
+
+    private void StartEdit(ProductDto product)
+    {
+        _editModel = new EditProductModel
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price,
+            Description = product.Description
+        };
+
+        _isEditMode = true;
+        _isCreatingOrEditing = true;
+    }
+
+    private void CancelEdit()
+    {
+        _editModel = new EditProductModel();
+        _isEditMode = false;
+        _isCreatingOrEditing = false;
+    }
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            if (_isEditMode)
+            {
+                var updated = await ApiClient.UpdateProductAsync(new UpdateProductRequest(
+                    _editModel.Id,
+                    _editModel.Name,
+                    _editModel.Price,
+                    _editModel.Description));
+
+                var index = _products.FindIndex(p => p.Id == updated.Id);
+                if (index >= 0)
+                {
+                    _products[index] = updated;
+                }
+            }
+            else
+            {
+                var created = await ApiClient.CreateProductAsync(new CreateProductRequest(
+                    _editModel.Name,
+                    _editModel.Price,
+                    _editModel.Description));
+
+                _products.Add(created);
+            }
+
+            CancelEdit();
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Failed to save product: {ex.Message}";
+        }
+    }
+
+    private async Task ConfirmDelete(int id)
+    {
+        try
+        {
+            await ApiClient.DeleteProductAsync(id);
+            var product = _products.FirstOrDefault(p => p.Id == id);
+            if (product is not null)
+            {
+                _products.Remove(product);
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Failed to delete product: {ex.Message}";
+        }
+    }
+}

@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/aspire/">
+    <Project Path="aspire/ProductApp.AppHost/ProductApp.AppHost.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/ProductApp.Api/ProductApp.Api.csproj" />
+    <Project Path="src/ProductApp.Application/ProductApp.Application.csproj" />
+    <Project Path="src/ProductApp.Data/ProductApp.Data.csproj" />
+    <Project Path="src/ProductApp.Infrastructure/ProductApp.Infrastructure.csproj" />
+    <Project Path="src/ProductApp.ServiceDefaults/ProductApp.ServiceDefaults.csproj" />
+    <Project Path="src/ProductApp.Web/ProductApp.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ProductApp.IntegrationTests/ProductApp.IntegrationTests.csproj" />
+  </Folder>
+  <Project Path="src\ProductApp.Model\ProductApp.Model.csproj" Type="Classic C#" />
+</Solution>
