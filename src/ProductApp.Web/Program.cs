@@ -8,7 +8,7 @@ builder.AddServiceDefaults();
 
 // HttpClient with service discovery
 builder.Services
-    .AddHttpClient<ProductApiClient>(client =>
+    .AddHttpClient<IProductService, ProductApiClient>(client =>
     {
         client.BaseAddress = new Uri("http://api");
     })

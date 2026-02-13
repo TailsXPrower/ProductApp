@@ -7,7 +7,7 @@
 @using ProductApp.Web.Exceptions
 @using ProductApp.Web.Services
 
-@inject ProductApiClient ApiClient
+@inject IProductService ProductService
 
 <PageTitle>Products</PageTitle>
 
@@ -53,7 +53,7 @@ else
         ClearErrorMessage();
         try
         {
-            var products = await ApiClient.GetProductsAsync();
+            var products = await ProductService.GetProductsAsync();
             _products.AddRange(products);
         }
         catch (Exception ex)
@@ -104,7 +104,7 @@ else
         {
             if (_isEditMode)
             {
-                var updated = await ApiClient.UpdateProductAsync(_editModel.Id, new ProductRequest(
+                var updated = await ProductService.UpdateProductAsync(_editModel.Id, new ProductRequest(
                     _editModel.Name,
                     _editModel.Price,
                     _editModel.Description));
@@ -117,7 +117,7 @@ else
             }
             else
             {
-                var created = await ApiClient.CreateProductAsync(new ProductRequest(
+                var created = await ProductService.CreateProductAsync(new ProductRequest(
                     _editModel.Name,
                     _editModel.Price,
                     _editModel.Description));
@@ -142,7 +142,7 @@ else
         ClearErrorMessage();
         try
         {
-            await ApiClient.DeleteProductAsync(id);
+            await ProductService.DeleteProductAsync(id);
             var product = _products.FirstOrDefault(p => p.Id == id);
             if (product is not null)
             {

@@ -3,7 +3,7 @@ using ProductApp.Model.Requests;
 
 namespace ProductApp.Web.Services;
 
-public sealed class ProductApiClient(HttpClient httpClient)
+public sealed class ProductApiClient(HttpClient httpClient) : IProductService
 {
     public async Task<IReadOnlyList<ProductDto>> GetProductsAsync(CancellationToken cancellationToken = default)
     {
@@ -55,4 +55,12 @@ public sealed class ProductApiClient(HttpClient httpClient)
 
         throw new HttpRequestException(message, null, response.StatusCode);
     }
+}
+
+public interface IProductService
+{
+    Task<IReadOnlyList<ProductDto>> GetProductsAsync(CancellationToken cancellationToken = default);
+    Task<ProductDto> CreateProductAsync(ProductRequest request, CancellationToken cancellationToken = default);
+    Task<ProductDto> UpdateProductAsync(int id, ProductRequest request, CancellationToken cancellationToken = default);
+    Task DeleteProductAsync(int id, CancellationToken cancellationToken = default);
 }
