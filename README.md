@@ -16,7 +16,7 @@
    ```powershell
    dotnet run --project aspire/ProductApp.AppHost/ProductApp.AppHost.csproj
    ```
-3. Navigate to the Aspire dashboard URL printed in the console (default `https://localhost:17013`). Use the dashboard to open the Blazor front end and API Swagger UI.
+3. Navigate to the Aspire dashboard URL printed in the console (default `https://localhost:17298`). Use the dashboard to open the Blazor front end and API Swagger UI.
 
 ## Running tests
 Run the integration suite (spins up PostgreSQL via Testcontainers and exercises FastEndpoints over HTTP):
