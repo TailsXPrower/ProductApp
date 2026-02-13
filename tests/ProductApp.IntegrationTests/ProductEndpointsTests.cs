@@ -14,7 +14,7 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
     [Fact]
     public async Task CreateProduct_ReturnsCreatedProduct()
     {
-        var request = new CreateProductRequest("Test Product", 99.99m, "Test Description");
+        var request = new ProductRequest("Test Product", 99.99m, "Test Description");
 
         var response = await _client.PostAsJsonAsync("/products", request);
         response.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -35,8 +35,8 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
     [Fact]
     public async Task GetAllProducts_ReturnsProducts()
     {
-        await _client.PostAsJsonAsync("/products", new CreateProductRequest("Product1", 10m, null));
-        await _client.PostAsJsonAsync("/products", new CreateProductRequest("Product2", 20m, "Desc"));
+        await _client.PostAsJsonAsync("/products", new ProductRequest("Product1", 10m, null));
+        await _client.PostAsJsonAsync("/products", new ProductRequest("Product2", 20m, "Desc"));
 
         var response = await _client.GetAsync("/products");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -49,7 +49,7 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
     [Fact]
     public async Task GetProductById_ReturnsProduct()
     {
-        var createResponse = await _client.PostAsJsonAsync("/products", new CreateProductRequest("Single", 30m, null));
+        var createResponse = await _client.PostAsJsonAsync("/products", new ProductRequest("Single", 30m, null));
         var created = await createResponse.Content.ReadFromJsonAsync<ProductDto>();
 
         var response = await _client.GetAsync($"/products/{created!.Id}");
@@ -63,11 +63,11 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
     [Fact]
     public async Task UpdateProduct_ReturnsUpdatedProduct()
     {
-        var createResponse = await _client.PostAsJsonAsync("/products", new CreateProductRequest("Old", 40m, null));
+        var createResponse = await _client.PostAsJsonAsync("/products", new ProductRequest("Old", 40m, null));
         var created = await createResponse.Content.ReadFromJsonAsync<ProductDto>();
 
-        var updateRequest = new UpdateProductRequest(created!.Id, "Updated", 50m, "Updated Desc");
-        var response = await _client.PutAsJsonAsync($"/products/{created.Id}", updateRequest);
+        var updateRequest = new ProductRequest("Updated", 50m, "Updated Desc");
+        var response = await _client.PutAsJsonAsync($"/products/{created!.Id}", updateRequest);
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
         var updated = await response.Content.ReadFromJsonAsync<ProductDto>();
@@ -80,7 +80,7 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
     [Fact]
     public async Task DeleteProduct_RemovesProduct()
     {
-        var createResponse = await _client.PostAsJsonAsync("/products", new CreateProductRequest("ToDelete", 60m, null));
+        var createResponse = await _client.PostAsJsonAsync("/products", new ProductRequest("ToDelete", 60m, null));
         var created = await createResponse.Content.ReadFromJsonAsync<ProductDto>();
 
         var response = await _client.DeleteAsync($"/products/{created!.Id}");

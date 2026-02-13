@@ -1,5 +1,6 @@
 using FastEndpoints;
 using FluentValidation;
+using ProductApp.Api.Extensions;
 using ProductApp.Application.Contracts;
 using ProductApp.Model.DTO;
 using ProductApp.Model.Requests;
@@ -8,7 +9,7 @@ namespace ProductApp.Api.Endpoints.Products;
 
 public sealed class UpdateProductEndpoint(
     IProductRepository repository,
-    IValidator<UpdateProductRequest> validator) : Endpoint<UpdateProductRequest, ProductDto>
+    IValidator<ProductRequest> validator) : Endpoint<ProductRequest, ProductDto>
 {
     public override void Configure()
     {
@@ -24,8 +25,10 @@ public sealed class UpdateProductEndpoint(
         });
     }
 
-    public override async Task HandleAsync(UpdateProductRequest req, CancellationToken cancellationToken)
+    public override async Task HandleAsync(ProductRequest req, CancellationToken cancellationToken)
     {
+        var id = Route<int>("id");
+        
         var validation = await validator.ValidateAsync(req, cancellationToken);
         if (!validation.IsValid)
         {
@@ -34,7 +37,7 @@ public sealed class UpdateProductEndpoint(
             return;
         }
 
-        var product = await repository.GetByIdAsync(req.Id, cancellationToken);
+        var product = await repository.GetByIdAsync(id, cancellationToken);
         if (product is null)
         {
             await Send.NotFoundAsync(cancellationToken);
@@ -44,6 +47,6 @@ public sealed class UpdateProductEndpoint(
         product.UpdateDetails(req.Name, req.Price, req.Description);
         await repository.UpdateAsync(product, cancellationToken);
 
-        await Send.OkAsync(new ProductDto(product.Id, product.Name, product.Price, product.Description), cancellationToken);
+        await Send.OkAsync(product.ToDto(), cancellationToken);
     }
 }

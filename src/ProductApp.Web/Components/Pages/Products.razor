@@ -104,8 +104,7 @@ else
         {
             if (_isEditMode)
             {
-                var updated = await ApiClient.UpdateProductAsync(new UpdateProductRequest(
-                    _editModel.Id,
+                var updated = await ApiClient.UpdateProductAsync(_editModel.Id, new ProductRequest(
                     _editModel.Name,
                     _editModel.Price,
                     _editModel.Description));
@@ -118,7 +117,7 @@ else
             }
             else
             {
-                var created = await ApiClient.CreateProductAsync(new CreateProductRequest(
+                var created = await ApiClient.CreateProductAsync(new ProductRequest(
                     _editModel.Name,
                     _editModel.Price,
                     _editModel.Description));

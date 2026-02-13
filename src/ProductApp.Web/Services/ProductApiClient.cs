@@ -14,7 +14,7 @@ public sealed class ProductApiClient(HttpClient httpClient)
         return products ?? [];
     }
 
-    public async Task<ProductDto> CreateProductAsync(CreateProductRequest request, CancellationToken cancellationToken = default)
+    public async Task<ProductDto> CreateProductAsync(ProductRequest request, CancellationToken cancellationToken = default)
     {
         var response = await httpClient.PostAsJsonAsync("products", request, cancellationToken);
         await EnsureSuccess(response, cancellationToken);
@@ -23,9 +23,9 @@ public sealed class ProductApiClient(HttpClient httpClient)
         return created ?? throw new InvalidOperationException("Failed to deserialize created product.");
     }
 
-    public async Task<ProductDto> UpdateProductAsync(UpdateProductRequest request, CancellationToken cancellationToken = default)
+    public async Task<ProductDto> UpdateProductAsync(int id, ProductRequest request, CancellationToken cancellationToken = default)
     {
-        var response = await httpClient.PutAsJsonAsync($"products/{request.Id}", request, cancellationToken);
+        var response = await httpClient.PutAsJsonAsync($"products/{id}", request, cancellationToken);
         await EnsureSuccess(response, cancellationToken);
 
         var updated = await response.Content.ReadFromJsonAsync<ProductDto>(cancellationToken: cancellationToken);

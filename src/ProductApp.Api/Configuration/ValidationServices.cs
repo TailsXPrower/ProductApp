@@ -8,7 +8,6 @@ public static class ValidationServices
 {
     public static void SetupValidators(this IServiceCollection services)
     {
-        services.AddScoped<IValidator<CreateProductRequest>, CreateProductRequestValidator>();
-        services.AddScoped<IValidator<UpdateProductRequest>, UpdateProductRequestValidator>();
+        services.AddScoped<IValidator<ProductRequest>, ProductRequestValidator>();
     }
 }

@@ -3,9 +3,9 @@ using ProductApp.Model.Requests;
 
 namespace ProductApp.Application.Validators;
 
-public sealed class CreateProductRequestValidator : AbstractValidator<CreateProductRequest>
+public sealed class ProductRequestValidator : AbstractValidator<ProductRequest>
 {
-    public CreateProductRequestValidator()
+    public ProductRequestValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty();

@@ -1,5 +1,6 @@
 using FastEndpoints;
 using FluentValidation;
+using ProductApp.Api.Extensions;
 using ProductApp.Application.Contracts;
 using ProductApp.Data.Entities;
 using ProductApp.Model.DTO;
@@ -9,7 +10,7 @@ namespace ProductApp.Api.Endpoints.Products;
 
 public sealed class CreateProductEndpoint(
     IProductRepository repository,
-    IValidator<CreateProductRequest> validator) : Endpoint<CreateProductRequest, ProductDto>
+    IValidator<ProductRequest> validator) : Endpoint<ProductRequest, ProductDto>
 {
     public override void Configure()
     {
@@ -23,7 +24,7 @@ public sealed class CreateProductEndpoint(
         });
     }
 
-    public override async Task HandleAsync(CreateProductRequest req, CancellationToken cancellationToken)
+    public override async Task HandleAsync(ProductRequest req, CancellationToken cancellationToken)
     {
         var validation = await validator.ValidateAsync(req, cancellationToken);
         if (!validation.IsValid)
@@ -38,7 +39,7 @@ public sealed class CreateProductEndpoint(
 
         await Send.CreatedAtAsync<GetProductByIdEndpoint>(
             new { id = product.Id },
-            new ProductDto(product.Id, product.Name, product.Price, product.Description),
+            product.ToDto(),
             cancellation: cancellationToken);
     }
 }
