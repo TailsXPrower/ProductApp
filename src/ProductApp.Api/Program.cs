@@ -1,6 +1,5 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using Microsoft.EntityFrameworkCore;
 using ProductApp.Application.Configuration;
 using ProductApp.Application.Contracts;
 using ProductApp.Infrastructure.Persistence;

@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace ProductApp.Web.Exceptions;
 
-public static class HttpRequestExceptionExtension
+internal static class HttpRequestExceptionExtension
 {
     public static string BuildErrorMessage(this HttpRequestException httpException)
     {

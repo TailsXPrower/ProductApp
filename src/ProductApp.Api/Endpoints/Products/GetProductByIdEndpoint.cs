@@ -23,7 +23,6 @@ public sealed class GetProductByIdEndpoint(IProductRepository repository) : Endp
     public override async Task HandleAsync(CancellationToken cancellationToken)
     {
         var product = await repository.GetByIdAsync(Route<int>("id"), cancellationToken);
-
         if (product is null)
         {
             await Send.NotFoundAsync(cancellationToken);
