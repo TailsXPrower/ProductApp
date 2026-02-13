@@ -4,6 +4,7 @@
 @using ProductApp.Model.Requests
 @using ProductApp.Web.Components.Forms.Product
 @using ProductApp.Web.Components.Lists.Product
+@using ProductApp.Web.Exceptions
 @using ProductApp.Web.Services
 
 @inject ProductApiClient ApiClient
@@ -49,6 +50,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        ClearErrorMessage();
         try
         {
             var products = await ApiClient.GetProductsAsync();
@@ -66,6 +68,7 @@ else
 
     private void ShowCreateForm()
     {
+        ClearErrorMessage();
         _editModel = new EditProductModel();
         _isEditMode = false;
         _isCreatingOrEditing = true;
@@ -73,6 +76,7 @@ else
 
     private void StartEdit(ProductDto product)
     {
+        ClearErrorMessage();
         _editModel = new EditProductModel
         {
             Id = product.Id,
@@ -87,6 +91,7 @@ else
 
     private void CancelEdit()
     {
+        ClearErrorMessage();
         _editModel = new EditProductModel();
         _isEditMode = false;
         _isCreatingOrEditing = false;
@@ -94,6 +99,7 @@ else
 
     private async Task HandleSubmit()
     {
+        ClearErrorMessage();
         try
         {
             if (_isEditMode)
@@ -122,6 +128,10 @@ else
 
             CancelEdit();
         }
+        catch (HttpRequestException httpException)
+        {
+            _errorMessage = httpException.BuildErrorMessage();
+        }
         catch (Exception ex)
         {
             _errorMessage = $"Failed to save product: {ex.Message}";
@@ -130,6 +140,7 @@ else
 
     private async Task ConfirmDelete(int id)
     {
+        ClearErrorMessage();
         try
         {
             await ApiClient.DeleteProductAsync(id);
@@ -139,9 +150,15 @@ else
                 _products.Remove(product);
             }
         }
+        catch (HttpRequestException httpException)
+        {
+            _errorMessage = httpException.BuildErrorMessage();
+        }
         catch (Exception ex)
         {
             _errorMessage = $"Failed to delete product: {ex.Message}";
         }
     }
+    
+    private void ClearErrorMessage() => _errorMessage = null;
 }
