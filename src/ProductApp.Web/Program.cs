@@ -3,8 +3,10 @@ using ProductApp.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Telemetry, Health Checks, etc.
 builder.AddServiceDefaults();
 
+// HttpClient with service discovery
 builder.Services
     .AddHttpClient<ProductApiClient>(client =>
     {
@@ -12,6 +14,7 @@ builder.Services
     })
     .AddServiceDiscovery();
 
+// Razor Components with interactive server-side rendering
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 

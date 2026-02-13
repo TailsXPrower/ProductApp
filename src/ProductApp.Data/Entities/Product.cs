@@ -2,7 +2,7 @@
 
 public sealed class Product(int id, string name, decimal price, string? description)
 {
-    public Product(string name, decimal price, string? description) : this(0, name, price, description) {}
+    public Product(string name, decimal price, string? description) : this(0, name, price, description) { }
 
     public int Id { get; private set; } = id;
     public string Name { get; private set; } = ValidateName(name);

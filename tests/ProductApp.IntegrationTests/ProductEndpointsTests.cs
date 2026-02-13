@@ -18,7 +18,7 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
 
         var response = await _client.PostAsJsonAsync("/products", request);
         response.StatusCode.Should().Be(HttpStatusCode.Created);
-        
+
         var product = await response.Content.ReadFromJsonAsync<ProductDto>();
         product.Should().NotBeNull();
         product.Name.Should().Be(request.Name);
@@ -40,7 +40,7 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
 
         var response = await _client.GetAsync("/products");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
+
         var products = await response.Content.ReadFromJsonAsync<ProductDto[]>();
         products.Should().NotBeNull();
         products.Length.Should().BeGreaterThanOrEqualTo(2);
@@ -54,7 +54,7 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
 
         var response = await _client.GetAsync($"/products/{created!.Id}");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
+
         var product = await response.Content.ReadFromJsonAsync<ProductDto>();
         product.Should().NotBeNull();
         product.Id.Should().Be(created.Id);
@@ -69,7 +69,7 @@ public class ProductEndpointsTests(ProductApiFactory factory) : IClassFixture<Pr
         var updateRequest = new UpdateProductRequest(created!.Id, "Updated", 50m, "Updated Desc");
         var response = await _client.PutAsJsonAsync($"/products/{created.Id}", updateRequest);
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
+
         var updated = await response.Content.ReadFromJsonAsync<ProductDto>();
         updated.Should().NotBeNull();
         updated.Name.Should().Be(updateRequest.Name);

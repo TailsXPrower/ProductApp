@@ -33,7 +33,7 @@ public static class Extensions
             // Turn on service discovery by default
             http.AddServiceDiscovery();
         });
-        
+
         return builder;
     }
 
@@ -95,7 +95,7 @@ public static class Extensions
         // Adding health checks endpoints to applications in non-development environments has security implications.
         // See https://aka.ms/dotnet/aspire/healthchecks for details before enabling these endpoints in non-development environments.
         if (!app.Environment.IsDevelopment()) return app;
-        
+
         // All health checks must pass for app to be considered ready to accept traffic after starting
         app.MapHealthChecks(HealthEndpointPath);
 
