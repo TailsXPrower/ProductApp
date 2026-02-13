@@ -28,7 +28,7 @@ public sealed class UpdateProductEndpoint(
     public override async Task HandleAsync(ProductRequest req, CancellationToken cancellationToken)
     {
         var id = Route<int>("id");
-        
+
         var validation = await validator.ValidateAsync(req, cancellationToken);
         if (!validation.IsValid)
         {

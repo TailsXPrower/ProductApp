@@ -26,7 +26,7 @@ internal static class HttpRequestExceptionExtension
             }
 
             if (!root.TryGetProperty("errors", out var errors) || errors.ValueKind != JsonValueKind.Object) return builder.Length > 0 ? builder.ToString() : httpException.Message;
-            
+
             foreach (var errorMessage in errors.EnumerateObject().SelectMany(property => property.Value.EnumerateArray()))
             {
                 if (builder.Length > 0)
